@@ -42,28 +42,23 @@
 <p><strong>Build genetic evidence</strong>: Identify candidate genetic associations (e.g. <code>trait-variant-allele-effect</code>) at scale from evolving scientific literature, particularly for complex polygenic traits often involve thousands of variants. See example at Table 1.</p>
 </li>
 <li>
-<p><strong>Evaluate evidence</strong>: Determine applicability, accounting for study design, population ancestry, conflicting studies, variant causality, joint effects of multiple variants, etc. This requires specialized expertise in statistical genetics and bioinformatics.</p>
+<p><strong>Evaluate evidence</strong>: Determine evidence applicability by accounting for population ancestry, conflicting studies, variant causality, joint effects of multiple variants, etc. This requires specialized expertise in statistical genetics and bioinformatics.</p>
 </li>
 <li>
-<p><strong>Evaluate RAG system</strong>: Probe its potential impact on patient safety, adherence to intended use (e.g. educational, non-diagnostic).</p>
+<p><strong>Evaluate RAG system</strong>: Probe its potential impact on patient safety, adherence to intended use (e.g. educational, non-diagnostic), while FDA regulatory guidance for generative AI in healthcare is still evolving.</p>
 </li>
 </ol>
 <p>This post focuses on the first challenge, building genetic evidence for expert review.</p>
-<h2 id="3-challenges-of-building-genetic-evidence">3. Challenges of building genetic evidence</h2>
-<h3 id="3-1-scale-and-continuous-updates">3.1. Scale and continuous updates</h3>
-<p>Genetic knowledge continues to expand across scientific publications and specialized databases:</p>
-<ul>
-<li><a href="https://www.ebi.ac.uk/gwas/docs/news/">GWAS Catalog</a>: over 1 million variant–trait associations.</li>
-<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11096795/">LitVar 2.0</a>: 13.8 million unique genetic variants reported as of December 2022.</li>
-<li><a href="https://pmc.ncbi.nlm.nih.gov/about/intro/">PubMed Central</a>: over 11 million full-text records as of FY2025.</li>
-</ul>
-<figure class="article-figure"><div class="figure-grid">
-<img alt="Cumulative literature-indexed genetic variants" src="assets/genome-rag/litvar_cumulative_variants.svg"/>
-<img alt="Cumulative PubMed records" src="assets/genome-rag/pubmed_cumulative_records.svg"/>
-</div><figcaption><em>Figure 2. Cumulative literature-indexed genetic variants and PubMed records, 2010–2025. Counts are calculated from the source archives; the LitVar counts differ from the published database statistics.</em></figcaption></figure>
 
-<p>Taking lipid genetics as an example, new genetic associations, variants, and biological mechanisms continue to be reported.</p>
-<div aria-label="Data table 1; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0"><table>
+
+<h2 id="3-challenges-of-building-genetic-evidence">3. Challenges of building genetic evidence</h2>
+
+<h3 id="3-1-scale-and-continuous-updates">3.1. Scale and continuous updates</h3>
+
+<p>Many complex traits are highly polygenic, with hundreds to thousands of contributing genetic variants. Taking lipid genetics as an example, new variant–trait associations, candidate causal variants, and biological mechanisms continue to be reported.</p>
+
+<div aria-label="Data table 1; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0">
+<table>
 <thead>
 <tr>
 <th scope="col">Year</th>
@@ -103,17 +98,40 @@
 <td>3 novel hyperlipidemia-associated candidate variants</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
+
 <p><em><strong>Table 1. Selected discoveries in lipid genetics, 2020–2025.</strong></em></p>
-<p>Evidence curation also depends on the research question. Even closely related phenotypes may require different evidence: genetic studies of <a href="https://pubmed.ncbi.nlm.nih.gov/27702941/">caffeine metabolism</a> examine circulating caffeine and its metabolites, whereas studies of <a href="https://pubmed.ncbi.nlm.nih.gov/25288136/">coffee consumption</a> examine habitual intake.</p>
-<p>This motivates a reusable evidence pipeline that allows experts to define the scope of evidence discovery and automate initial screening and extraction tasks.</p>
+
+<p>Collecting and maintaining evidence at this scale is challenging, as genetic knowledge is dispersed across a growing number of scientific publications and specialized databases:</p>
+
+<ul>
+<li><a href="https://www.ebi.ac.uk/gwas/docs/news/">GWAS Catalog</a>: over 1 million variant–trait associations.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11096795/">LitVar 2.0</a>: 13.8 million unique genetic variants reported as of December 2022.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/about/intro/">PubMed Central</a>: over 11 million full-text records as of FY2025.</li>
+</ul>
+
+<figure class="article-figure">
+<div class="figure-grid">
+<img alt="Cumulative literature-indexed genetic variants" src="assets/genome-rag/litvar_cumulative_variants.svg"/>
+<img alt="Cumulative PubMed records" src="assets/genome-rag/pubmed_cumulative_records.svg"/>
+</div>
+<figcaption><em>Figure 2. Cumulative literature-indexed genetic variants and PubMed records, 2010–2025. Counts are calculated from the source archives; the LitVar counts differ from the published database statistics.</em></figcaption>
+</figure>
+
+<p>This motivates a reusable evidence pipeline that allows experts to define the scope of evidence discovery and automate literature screening and evidence extraction across different traits.</p>
+
 <h3 id="3-2-verifiability-of-llm-generated-evidence">3.2. Verifiability of LLM-generated evidence</h3>
+
 <p>While LLMs offer an approach to processing scientific literature at scale, their outputs require expert verification.</p>
+
 <ul>
 <li>Are the model's classification decisions consistent?</li>
 <li>Can the extracted claims be traced to supporting evidence in the source study?</li>
 </ul>
-<p>The challenge is to automate evidence collection without making subsequent expert verification unnecessarily difficult.</p>
+
+<p>The challenge worth solving here is to automate evidence collection without making subsequent expert verification unnecessarily difficult.</p>
+
 <h2 id="4-method">4. Method</h2>
 <figure class="article-figure"><div class="figure-single">
 <img alt="LLM-assisted genetic evidence pipeline" src="assets/genome-rag/pipeline.svg"/>
