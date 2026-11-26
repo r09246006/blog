@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Genomic knowledge graph</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#263342;font-family:Arial,Helvetica,sans-serif}main{max-width:820px;margin:12px auto;padding:0 16px}h1{font-size:23px;margin:0 0 6px;letter-spacing:-.35px}p{margin:0;color:#667385;font-size:14px}svg{display:block;width:100%;height:auto;font-family:Arial,Helvetica,sans-serif}a{cursor:pointer}a .paper{transition:fill .15s,stroke-width .15s}a:hover .paper,a:focus .paper{fill:#eae0ff;stroke-width:2.5}a:focus{outline:none}a:hover .link{text-decoration:underline}.link{text-decoration:underline}.note{font-size:12px;line-height:1.45;margin-top:5px}.legend{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 22px;font-size:12px;color:#566375;margin:5px 0 14px}.legend span{display:inline-flex;align-items:center;gap:6px}.dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+</style>
+</head>
+<body><main>
+<svg viewBox="0 0 720 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">Connecting WGS data and research evidence</title>
+<desc id="desc">A hypothetical rs762551 A/A genotype maps to CYP1A2, a gene involved in caffeine metabolism. Three clickable publications explicitly discuss rs762551.</desc>
+<!-- Side panels -->
+<rect x="8" y="16" width="216" height="592" rx="17" fill="#f2f7fd"/>
+<rect x="496" y="16" width="216" height="592" rx="17" fill="#f7f3fc"/>
+<text x="116" y="46" text-anchor="middle" fill="#245da8" font-size="19" font-weight="700">Personal genome</text>
+<text x="604" y="46" text-anchor="middle" fill="#7446a8" font-size="19" font-weight="700">Scientific evidence</text>
+<text x="604" y="65" text-anchor="middle" fill="#76648e" font-size="12">Studies of rs762551</text>
+<!-- DNA helix -->
+<g id="dna"><line x1="116.00" y1="71.00" x2="116.00" y2="71.00" stroke="#91b8e9" stroke-width="2"/><line x1="129.88" y1="78.50" x2="102.12" y2="78.50" stroke="#91b8e9" stroke-width="2"/><line x1="141.02" y1="86.00" x2="90.98" y2="86.00" stroke="#91b8e9" stroke-width="2"/><line x1="147.20" y1="93.50" x2="84.80" y2="93.50" stroke="#91b8e9" stroke-width="2"/><line x1="147.20" y1="101.00" x2="84.80" y2="101.00" stroke="#91b8e9" stroke-width="2"/><line x1="141.02" y1="108.50" x2="90.98" y2="108.50" stroke="#91b8e9" stroke-width="2"/><line x1="129.88" y1="116.00" x2="102.12" y2="116.00" stroke="#91b8e9" stroke-width="2"/><line x1="116.00" y1="123.50" x2="116.00" y2="123.50" stroke="#91b8e9" stroke-width="2"/><line x1="102.12" y1="131.00" x2="129.88" y2="131.00" stroke="#91b8e9" stroke-width="2"/><line x1="90.98" y1="138.50" x2="141.02" y2="138.50" stroke="#91b8e9" stroke-width="2"/><line x1="84.80" y1="146.00" x2="147.20" y2="146.00" stroke="#91b8e9" stroke-width="2"/><line x1="84.80" y1="153.50" x2="147.20" y2="153.50" stroke="#91b8e9" stroke-width="2"/><line x1="90.98" y1="161.00" x2="141.02" y2="161.00" stroke="#91b8e9" stroke-width="2"/><line x1="102.12" y1="168.50" x2="129.88" y2="168.50" stroke="#91b8e9" stroke-width="2"/><line x1="116.00" y1="176.00" x2="116.00" y2="176.00" stroke="#91b8e9" stroke-width="2"/><path d="M116.00,71.00 L118.01,72.05 L120.01,73.10 L122.00,74.15 L123.96,75.20 L125.89,76.25 L127.78,77.30 L129.62,78.35 L131.42,79.40 L133.15,80.45 L134.81,81.50 L136.40,82.55 L137.91,83.60 L139.33,84.65 L140.66,85.70 L141.89,86.75 L143.02,87.80 L144.04,88.85 L144.95,89.90 L145.75,90.95 L146.43,92.00 L146.99,93.05 L147.43,94.10 L147.75,95.15 L147.94,96.20 L148.00,97.25 L147.94,98.30 L147.75,99.35 L147.43,100.40 L146.99,101.45 L146.43,102.50 L145.75,103.55 L144.95,104.60 L144.04,105.65 L143.02,106.70 L141.89,107.75 L140.66,108.80 L139.33,109.85 L137.91,110.90 L136.40,111.95 L134.81,113.00 L133.15,114.05 L131.42,115.10 L129.62,116.15 L127.78,117.20 L125.89,118.25 L123.96,119.30 L122.00,120.35 L120.01,121.40 L118.01,122.45 L116.00,123.50 L113.99,124.55 L111.99,125.60 L110.00,126.65 L108.04,127.70 L106.11,128.75 L104.22,129.80 L102.38,130.85 L100.58,131.90 L98.85,132.95 L97.19,134.00 L95.60,135.05 L94.09,136.10 L92.67,137.15 L91.34,138.20 L90.11,139.25 L88.98,140.30 L87.96,141.35 L87.05,142.40 L86.25,143.45 L85.57,144.50 L85.01,145.55 L84.57,146.60 L84.25,147.65 L84.06,148.70 L84.00,149.75 L84.06,150.80 L84.25,151.85 L84.57,152.90 L85.01,153.95 L85.57,155.00 L86.25,156.05 L87.05,157.10 L87.96,158.15 L88.98,159.20 L90.11,160.25 L91.34,161.30 L92.67,162.35 L94.09,163.40 L95.60,164.45 L97.19,165.50 L98.85,166.55 L100.58,167.60 L102.38,168.65 L104.22,169.70 L106.11,170.75 L108.04,171.80 L110.00,172.85 L111.99,173.90 L113.99,174.95 L116.00,176.00" fill="none" stroke="#397ac9" stroke-width="3.5" stroke-linecap="round"/><path d="M116.00,71.00 L113.99,72.05 L111.99,73.10 L110.00,74.15 L108.04,75.20 L106.11,76.25 L104.22,77.30 L102.38,78.35 L100.58,79.40 L98.85,80.45 L97.19,81.50 L95.60,82.55 L94.09,83.60 L92.67,84.65 L91.34,85.70 L90.11,86.75 L88.98,87.80 L87.96,88.85 L87.05,89.90 L86.25,90.95 L85.57,92.00 L85.01,93.05 L84.57,94.10 L84.25,95.15 L84.06,96.20 L84.00,97.25 L84.06,98.30 L84.25,99.35 L84.57,100.40 L85.01,101.45 L85.57,102.50 L86.25,103.55 L87.05,104.60 L87.96,105.65 L88.98,106.70 L90.11,107.75 L91.34,108.80 L92.67,109.85 L94.09,110.90 L95.60,111.95 L97.19,113.00 L98.85,114.05 L100.58,115.10 L102.38,116.15 L104.22,117.20 L106.11,118.25 L108.04,119.30 L110.00,120.35 L111.99,121.40 L113.99,122.45 L116.00,123.50 L118.01,124.55 L120.01,125.60 L122.00,126.65 L123.96,127.70 L125.89,128.75 L127.78,129.80 L129.62,130.85 L131.42,131.90 L133.15,132.95 L134.81,134.00 L136.40,135.05 L137.91,136.10 L139.33,137.15 L140.66,138.20 L141.89,139.25 L143.02,140.30 L144.04,141.35 L144.95,142.40 L145.75,143.45 L146.43,144.50 L146.99,145.55 L147.43,146.60 L147.75,147.65 L147.94,148.70 L148.00,149.75 L147.94,150.80 L147.75,151.85 L147.43,152.90 L146.99,153.95 L146.43,155.00 L145.75,156.05 L144.95,157.10 L144.04,158.15 L143.02,159.20 L141.89,160.25 L140.66,161.30 L139.33,162.35 L137.91,163.40 L136.40,164.45 L134.81,165.50 L133.15,166.55 L131.42,167.60 L129.62,168.65 L127.78,169.70 L125.89,170.75 L123.96,171.80 L122.00,172.85 L120.01,173.90 L118.01,174.95 L116.00,176.00" fill="none" stroke="#7cabeb" stroke-width="3.5" stroke-linecap="round"/></g>
+<text x="116" y="199" text-anchor="middle" font-size="18" font-weight="700" fill="#263342">WGS data</text>
+<path d="M116 211V246" stroke="#6694cf" stroke-width="2"/>
+<!-- Variants -->
+<rect x="32" y="246" width="168" height="62" rx="9" fill="#eaf0f8" stroke="#cedbea"/>
+<text x="116" y="282" text-anchor="middle" font-size="15" fill="#8290a1">Other variants</text>
+<rect x="32" y="326" width="168" height="82" rx="9" fill="#dceaff" stroke="#3b82f6" stroke-width="2"/>
+<text x="116" y="358" text-anchor="middle" font-size="22" font-weight="700" fill="#245da8">rs762551</text>
+<text x="116" y="385" text-anchor="middle" font-size="17" fill="#263342">A/A genotype</text>
+<rect x="32" y="426" width="168" height="62" rx="9" fill="#eaf0f8" stroke="#cedbea"/>
+<text x="116" y="462" text-anchor="middle" font-size="15" fill="#8290a1">Other variants</text>
+<!-- Variant, gene and study connections -->
+<path d="M200 367H278" stroke="#3b82f6" stroke-width="2.5" fill="none"/>
+<text x="239" y="354" font-size="12" text-anchor="middle" fill="#667385">maps to</text>
+<g fill="none" stroke="#9270c1" stroke-width="2.2">
+<path d="M418 317C469 300 455 147 514 147"/>
+<path d="M442 367H514"/>
+<path d="M418 417C469 429 458 524 514 524"/>
+</g>
+<!-- Gene -->
+<circle cx="360" cy="367" r="82" fill="#e5f5f1" stroke="#0d9488" stroke-width="2.4"/>
+<text x="360" y="337" text-anchor="middle" font-size="15" font-weight="700" fill="#087e76">GENE</text>
+<text x="360" y="375" text-anchor="middle" font-size="30" font-weight="700" fill="#087e76">CYP1A2</text>
+<text x="360" y="402" text-anchor="middle" font-size="16" fill="#263342">Enzyme activity</text>
+<!-- Trait -->
+<path d="M360 449V495" stroke="#bd822a" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="246" y="495" width="228" height="103" rx="12" fill="#fff4df" stroke="#d99c3e" stroke-width="1.6"/>
+<text x="360" y="522" text-anchor="middle" font-size="14" font-weight="700" fill="#a16416">BIOLOGICAL TRAIT</text>
+<text x="360" y="551" text-anchor="middle" font-size="22" font-weight="700" fill="#263342">Caffeine</text>
+<text x="360" y="577" text-anchor="middle" font-size="22" font-weight="700" fill="#263342">metabolism</text>
+<!-- Clickable study cards -->
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7295849/" target="_blank" rel="noopener noreferrer" aria-label="2020 crossover study, full text">
+<rect class="paper" x="514" y="88" width="180" height="118" rx="10" fill="#f0e9fa" stroke="#ac8ed0" stroke-width="1.5"/>
+<use href="#paper-icon" x="593" y="100"/>
+<text x="604" y="143" font-size="17" font-weight="700" fill="#3f3159" text-anchor="middle">Crossover study</text>
+<text x="604" y="164" font-size="15" fill="#7446a8" text-anchor="middle">2020</text>
+<text x="604" y="185" font-size="13" fill="#7446a8" class="link" text-anchor="middle">Caffeine response</text>
+</a>
+<a href="https://pubmed.ncbi.nlm.nih.gov/29282363/" target="_blank" rel="noopener noreferrer" aria-label="2018 systematic review and meta-analysis, PubMed">
+<rect class="paper" x="514" y="308" width="180" height="118" rx="10" fill="#f0e9fa" stroke="#ac8ed0" stroke-width="1.5"/>
+<use href="#paper-icon" x="593" y="320"/>
+<text x="604" y="363" font-size="17" font-weight="700" fill="#3f3159" text-anchor="middle">Meta-analysis</text>
+<text x="604" y="384" font-size="15" fill="#7446a8" text-anchor="middle">2018</text>
+<text x="604" y="405" font-size="13" fill="#7446a8" class="link" text-anchor="middle">Enzyme activity</text>
+</a>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11515775/" target="_blank" rel="noopener noreferrer" aria-label="2024 systematic review, full text">
+<rect class="paper" x="514" y="465" width="180" height="118" rx="10" fill="#f0e9fa" stroke="#ac8ed0" stroke-width="1.5"/>
+<use href="#paper-icon" x="593" y="477"/>
+<text x="604" y="520" font-size="17" font-weight="700" fill="#3f3159" text-anchor="middle">Systematic review</text>
+<text x="604" y="541" font-size="15" fill="#7446a8" text-anchor="middle">2024</text>
+<text x="604" y="562" font-size="13" fill="#7446a8" class="link" text-anchor="middle">Caffeine genetics</text>
+</a>
+<defs><g id="paper-icon" fill="none" stroke="#9270c1" stroke-width="1.8" stroke-linejoin="round"><path d="M1 0H14L21 7V27H1Z M14 0V7H21 M5 13H17 M5 18H17"/></g></defs>
+</svg>
+<div class="legend"><span><i class="dot" style="background:#3b82f6"></i>Personal data</span><span><i class="dot" style="background:#0d9488"></i>Gene</span><span><i class="dot" style="background:#d99c3e"></i>Trait</span><span><i class="dot" style="background:#9270c1"></i>Research</span></div>
+</main></body></html>

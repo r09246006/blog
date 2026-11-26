@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building a RAG System for Personal Genome Exploration | GuanRu-Chen-723</title>
+  <meta name="description" content="Building a RAG System for Personal Genome Exploration">
+  <link rel="stylesheet" href="style.css?v=441b1c1cd745">
+  <script src="navigation.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to article</a>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Profile and projects">
+      <div class="profile">
+        <div class="name">GuanRu-Chen-723</div>
+        <a class="contact" href="mailto:l410431123@gmail.com">l410431123@gmail.com</a>
+        <a class="contact linkedin" href="https://www.linkedin.com/in/guanru0723">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+      </div>
+      <button class="mobile-toggle" aria-controls="project-nav" aria-expanded="true" type="button">Projects <span aria-hidden="true" class="toggle-indicator">&#8722;</span></button>
+      <nav id="project-nav" class="project-nav" aria-label="Project and section navigation">
+        <div class="nav-heading">Projects</div>
+        <div class="project-group"><a class="project-link" href="#project-title" aria-current="page">Building a RAG System for Personal Genome Exploration</a><ul class="section-list"><li><a class="section-link" data-section href="#1-project-goal">1. Project goal</a></li><li><a class="section-link" data-section href="#2-problem">2. Problem</a></li><li><a class="section-link" data-section href="#3-challenges-of-building-genetic-evidence">3. Challenges of building genetic evidence</a></li><li><a class="section-link" data-section href="#4-method">4. Method</a></li><li><a class="section-link" data-section href="#5-results">5. Results</a></li><li><a class="section-link" data-section href="#6-conclusion">6. Conclusion</a></li></ul></div>
+      </nav>
+    </aside>
+    <main id="main-content" class="main-content" tabindex="-1">
+      <article class="article">
+        <header class="article-header">
+          <h1 id="project-title">Building a RAG System for Personal Genome Exploration</h1>
+          <p class="subtitle">Part 1: Building an LLM-Assisted Genetic Evidence Pipeline</p>
+        </header>
+        <div class="article-body">
+          <h2 id="1-project-goal">1. Project goal</h2>
+<p>Whole-genome sequencing (WGS) has unlocked our ability to read the human genome at scale (~3.2 billion base pairs). However, the scientific knowledge required to understand it remains fragmented across millions of publications and specialized databases.</p>
+<p>We're experimenting with a personal genomics RAG system that connects WGS data with published genetic research, enabling individuals to explore and understand their own genomes through scientific evidence, while complementing geneticist counseling. For example, users can explore how their genetic makeup may influence their predisposition to hyperlipidemia, or how their body may respond to caffeine differently than others.</p>
+<figure class="article-figure"><iframe class="interactive-figure" src="assets/genome-rag/wgs_study_connection.html" title="Connecting whole-genome sequencing data with scientific evidence"></iframe><figcaption><em>Figure 1. Example of how personal WGS data can be connected to published genetic research: the variant rs762551 is linked to CYP1A2, a gene associated with caffeine metabolism, with supporting evidence from published studies.</em></figcaption></figure>
+
+<h2 id="2-problem">2. Problem</h2>
+<p>Developing such system poses 3 main challenges:</p>
+<ol>
+<li>
+<p><strong>Build genetic evidence</strong>: Identify candidate genetic associations (e.g. <code>trait-variant-allele-effect</code>) at scale from evolving scientific literature, particularly for complex polygenic traits often involve thousands of variants. See example at Table 1.</p>
+</li>
+<li>
+<p><strong>Evaluate evidence</strong>: Determine applicability, accounting for study design, population ancestry, conflicting studies, variant causality, joint effects of multiple variants, etc. This requires specialized expertise in statistical genetics and bioinformatics.</p>
+</li>
+<li>
+<p><strong>Evaluate RAG system</strong>: Probe its potential impact on patient safety, adherence to intended use (e.g. educational, non).</p>
+</li>
+</ol>
+<p>This post focuses on the first challenge, building genetic evidence for expert review.</p>
+<h2 id="3-challenges-of-building-genetic-evidence">3. Challenges of building genetic evidence</h2>
+<h3 id="3-1-scale-and-continuous-updates">3.1. Scale and continuous updates</h3>
+<p>Genetic knowledge continues to expand across scientific publications and specialized databases:</p>
+<ul>
+<li><a href="https://www.ebi.ac.uk/gwas/docs/news/">GWAS Catalog</a>: over 1 million variant–trait associations.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11096795/">LitVar 2.0</a>: 13.8 million unique genetic variants reported as of December 2022.</li>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/about/intro/">PubMed Central</a>: over 11 million full-text records as of FY2025.</li>
+</ul>
+<figure class="article-figure"><div class="figure-grid">
+<img alt="Cumulative literature-indexed genetic variants" src="assets/genome-rag/litvar_cumulative_variants.svg"/>
+<img alt="Cumulative PubMed records" src="assets/genome-rag/pubmed_cumulative_records.svg"/>
+</div><figcaption><em>Figure 2. Cumulative literature-indexed genetic variants and PubMed records, 2010–2025. Counts are calculated from the source archives; the LitVar counts differ from the published database statistics.</em></figcaption></figure>
+
+<p>Taking lipid genetics as an example, new genetic associations, variants, and biological mechanisms continue to be reported.</p>
+<div aria-label="Data table 1; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Year</th>
+<th scope="col">Study</th>
+<th scope="col">Reported finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/40926209/">Selvaraj et al. — Whole-genome analysis of LDL cholesterol</a></td>
+<td>704 novel single-variant associations with LDL cholesterol</td>
+</tr>
+<tr>
+<td>2024</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/38933898/">Mendes et al. — Germline variants in severe hypertriglyceridemia</a></td>
+<td>16 previously unreported variants, including variants of uncertain significance</td>
+</tr>
+<tr>
+<td>2023</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/37848354/">Junna et al. — Finnish-enriched hypercholesterolemia variants</a></td>
+<td>3 variants in LDLR and LDLRAP1 likely associated with hypercholesterolemia</td>
+</tr>
+<tr>
+<td>2022</td>
+<td><a href="https://doi.org/10.1186/s12967-022-03697-w">Gandhi et al. — Genetic burden of familial hypercholesterolemia</a></td>
+<td>14 putatively novel single-nucleotide variants and one novel PCSK9 copy-number variant</td>
+</tr>
+<tr>
+<td>2021</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/33601267/">Reeskamp et al. — Intronic variants and LDLR splicing</a></td>
+<td>1 deep intronic LDLR variant causing abnormal RNA splicing</td>
+</tr>
+<tr>
+<td>2020</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/34026292/">Juang et al. — Rare variant discovery in Taiwan</a></td>
+<td>3 novel hyperlipidemia-associated candidate variants</td>
+</tr>
+</tbody>
+</table></div>
+<p><em><strong>Table 1. Selected discoveries in lipid genetics, 2020–2025.</strong></em></p>
+<p>Evidence curation also depends on the research question. Even closely related phenotypes may require different evidence: genetic studies of <a href="https://pubmed.ncbi.nlm.nih.gov/27702941/">caffeine metabolism</a> examine circulating caffeine and its metabolites, whereas studies of <a href="https://pubmed.ncbi.nlm.nih.gov/25288136/">coffee consumption</a> examine habitual intake.</p>
+<p>This motivates a reusable evidence pipeline that allows experts to define the scope of evidence discovery and automate initial screening and extraction tasks.</p>
+<h3 id="3-2-verifiability-of-llm-generated-evidence">3.2. Verifiability of LLM-generated evidence</h3>
+<p>While LLMs offer an approach to processing scientific literature at scale, their outputs require expert verification.</p>
+<ul>
+<li>Are the model's classification decisions consistent?</li>
+<li>Can the extracted claims be traced to supporting evidence in the source study?</li>
+</ul>
+<p>The challenge is to automate evidence collection without making subsequent expert verification unnecessarily difficult.</p>
+<h2 id="4-method">4. Method</h2>
+<figure class="article-figure"><div class="figure-single">
+<img alt="LLM-assisted genetic evidence pipeline" src="assets/genome-rag/pipeline.svg"/>
+</div><figcaption><em>Figure 3. <strong>LLM-assisted genetic evidence pipeline</strong>. Guided by expert-defined build recipes, the pipeline identifies candidate genetic associations and extracts allele-level supporting evidence, preserving decision provenance to facilitate expert review.</em></figcaption></figure>
+
+<p>The pipeline supports two early stages of expert genetic evidence collection: identifying candidate genetic associations and collecting their allele-level supporting evidence.</p>
+<p>We decompose this workflow into two sequential LLM tasks:</p>
+<ul>
+<li><strong>Trait labeling:</strong> Identify GWAS-reported traits relevant to expert-defined target traits and derive candidate trait–variant associations.</li>
+<li><strong>Study extraction:</strong> Identify and extract allele-level supporting evidence from studies available in PubMed Central (PMC).</li>
+</ul>
+<p>Starting from GWAS associations is one strategy for defining the candidate search space.</p>
+<p>To make the pipeline inspectable, we introduce two mechanisms:</p>
+<ul>
+<li><strong>Label consistency:</strong> Repeat trait labeling to expose variability in model judgments.</li>
+<li><strong>Quotation verification:</strong> Locate supporting quotations for extracted claims in the source study through lexical matching.</li>
+</ul>
+<p>These mechanisms facilitate expert verification rather than establish the scientific validity of model outputs.</p>
+<p>The pipeline consists of four main components.</p>
+<h3 id="4-1-build-recipe-registry">4.1. Build recipe registry</h3>
+<p>Allows genetic experts to define the scope of evidence discovery:</p>
+<ul>
+<li><strong>Target trait</strong>
+<ul>
+<li>Name (e.g., hyperlipidemia).</li>
+<li>Trait definition.</li>
+</ul>
+</li>
+<li><strong>GWAS association scope</strong>
+<ul>
+<li>GWAS significance threshold.</li>
+<li>Minimum number of distinct GWAS studies per variant, as a proxy for how extensively a variant has been studied.</li>
+</ul>
+</li>
+<li><strong>PMC study evidence scope</strong>
+<ul>
+<li>Literature search terms.</li>
+<li>Maximum variants searched per target.</li>
+<li>Maximum search results per query.</li>
+<li>Maximum articles selected for extraction per target–variant pair.</li>
+</ul>
+</li>
+<li><strong>Labeling configuration</strong>
+<ul>
+<li>Number of repeated labeling runs.</li>
+<li>Minimum number of agreeing votes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-data-specification">4.2. Data specification</h3>
+<p>Defines the schemas for representing genetic associations, supporting evidence, and decision provenance:</p>
+<ul>
+<li><strong>Association:</strong> Target trait, GWAS-reported trait, and genetic variant.</li>
+<li><strong>Evidence:</strong> Source study, allele, reported effect, and supporting quotation.</li>
+<li><strong>Provenance:</strong> Label votes, selection decisions, quotation verification status, and source references.</li>
+</ul>
+<p>The current allele-level evidence dataset focuses on nucleotide substitutions, excluding insertions and deletions.</p>
+<h3 id="4-3-task-controller">4.3. Task controller</h3>
+<p>Manages data acquisition, task preparation, output validation, and execution.</p>
+<p><strong>Data acquisition</strong></p>
+<ul>
+<li>GWAS Catalog: retrieve reported variant–trait associations.</li>
+<li>PMC: search, retrieve, and parse full-text publications, including structured tables.</li>
+</ul>
+<p><strong>Task preparation</strong></p>
+<ul>
+<li>Apply deterministic filtering and selection criteria defined in the build recipe.</li>
+<li>Prepare task-specific prompts with source data and output schemas.</li>
+</ul>
+<p><strong>Output validation</strong></p>
+<ul>
+<li>Validate model outputs against Pydantic schemas and task-specific constraints.</li>
+<li>Perform repeated trait labeling (default N = 3) and apply consensus-based filtering.</li>
+<li>Verify the presence of supporting quotations in the source text through lexical matching.</li>
+</ul>
+<p><strong>Task execution</strong></p>
+<ul>
+<li>Manage token budgets, inference requests, completion status, failures, and retries.</li>
+<li>Use SGLang for concurrent inference management.</li>
+</ul>
+<p><strong>Inference setup:</strong> One H100 GPU serving GPT-OSS-120B with FP8 KV cache. Maximum concurrency and sequence length are configured by task type.</p>
+<h3 id="4-4-merger">4.4. Merger</h3>
+<p>Joins source data, LLM outputs, label consistency signals, and decision provenance into structured, traceable records that help experts answer:</p>
+<ul>
+<li><strong>What is the candidate association?</strong> Target trait, GWAS-reported trait, and variant.</li>
+<li><strong>How consistent is the labeling?</strong> Label votes across repeated runs.</li>
+<li><strong>What evidence supports the association?</strong> Source study, extracted allele-level effects, and supporting quotations.</li>
+<li><strong>Where is the evidence reported?</strong> Quotations and their locations in the source study.</li>
+<li><strong>Why was the record included?</strong> Selection criteria and recorded decisions.</li>
+</ul>
+<p>The resulting records provide a focused and inspectable evidence dataset for subsequent expert evaluation. Review sheets also allow experts to inspect and override automated trait labels.</p>
+<h2 id="5-results">5. Results</h2>
+<p>We examine the pipeline's end-to-end execution on three prevalent polygenic phenotypes: hyperlipidemia, hypertension, and hyperglycemia.</p>
+<p>The reference run uses the following build recipe:</p>
+<div aria-label="Data table 2; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Parameter</th>
+<th scope="col">Setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GWAS significance threshold</td>
+<td>P ≤ 5 × 10⁻⁸</td>
+</tr>
+<tr>
+<td>Minimum GWAS studies per variant</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Trait labeling runs</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Trait labeling consensus</td>
+<td>≥ 2 of 3 votes</td>
+</tr>
+<tr>
+<td>Variants searched per target</td>
+<td>500</td>
+</tr>
+<tr>
+<td>Maximum search results per query</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Maximum articles extracted per target–variant pair</td>
+<td>5</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="5-1-identifying-candidate-associations-at-scale">5.1. Identifying candidate associations at scale</h3>
+<p><strong>How many GWAS-reported traits match our target phenotypes, and how consistent are the LLM judgments?</strong></p>
+<p>Starting from 1,061,816 GWAS association records, statistical prefiltering produces 25,926 unique trait descriptions for LLM labeling. Each trait is screened against the target definitions across three labeling runs.</p>
+<p><strong>Table 2. GWAS trait labeling results.</strong></p>
+<div aria-label="Data table 3; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Metric</th>
+<th scope="col" style="text-align:right">Hyperlipidemia</th>
+<th scope="col" style="text-align:right">Hypertension</th>
+<th scope="col" style="text-align:right">Hyperglycemia</th>
+<th scope="col" style="text-align:right">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proposed labels</td>
+<td style="text-align:right">2,142</td>
+<td style="text-align:right">113</td>
+<td style="text-align:right">193</td>
+<td style="text-align:right">2,448</td>
+</tr>
+<tr>
+<td>3/3 votes</td>
+<td style="text-align:right">1,124 (52.5%)</td>
+<td style="text-align:right">85 (75.2%)</td>
+<td style="text-align:right">140 (72.5%)</td>
+<td style="text-align:right">1,349 (55.1%)</td>
+</tr>
+<tr>
+<td>2/3 votes</td>
+<td style="text-align:right">290 (13.5%)</td>
+<td style="text-align:right">8 (7.1%)</td>
+<td style="text-align:right">19 (9.8%)</td>
+<td style="text-align:right">317 (13.0%)</td>
+</tr>
+<tr>
+<td>1/3 vote</td>
+<td style="text-align:right">728 (34.0%)</td>
+<td style="text-align:right">20 (17.7%)</td>
+<td style="text-align:right">34 (17.6%)</td>
+<td style="text-align:right">782 (31.9%)</td>
+</tr>
+<tr>
+<td><strong>Matched traits (≥ 2 votes)</strong></td>
+<td style="text-align:right"><strong>1,414 (5.45%)</strong></td>
+<td style="text-align:right"><strong>93 (0.36%)</strong></td>
+<td style="text-align:right"><strong>159 (0.61%)</strong></td>
+<td style="text-align:right"><strong>1,659 (6.40%)</strong></td>
+</tr>
+<tr>
+<td>Corresponded candidate variants</td>
+<td style="text-align:right">8,740</td>
+<td style="text-align:right">3,240</td>
+<td style="text-align:right">2,650</td>
+<td style="text-align:right">11,975</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Voting percentages are relative to proposed labels. Matched-trait percentages are relative to the 25,926 screened traits. Total matched traits and candidate variants are deduplicated across targets.</em></p>
+<ul>
+<li>Across the three targets, 1,659 unique traits (6.4%) meet the consensus criterion, identifying 11,975 unique candidate variants.</li>
+<li>Of 2,448 proposed labels, 782 (31.9%) receive only one vote.</li>
+</ul>
+<p>LLMs enable large-scale semantic screening of GWAS trait descriptions. However, variability across labeling runs motivates the use of consensus-based filtering before expert review.</p>
+<h3 id="5-2-how-much-supporting-evidence-can-we-find">5.2. How much supporting evidence can we find?</h3>
+<p><strong>Given a candidate genetic association, how often can we identify relevant literature containing allele-level evidence?</strong></p>
+<p>For each target, we search PMC for 500 prioritized variants. Articles explicitly mentioning the variant's rsID are eligible for extraction, with a maximum of five articles per target–variant pair.</p>
+<p><strong>Table 3. Identification of allele-level supporting evidence.</strong></p>
+<div aria-label="Data table 4; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Metric</th>
+<th scope="col" style="text-align:right">Hyperlipidemia</th>
+<th scope="col" style="text-align:right">Hypertension</th>
+<th scope="col" style="text-align:right">Hyperglycemia</th>
+<th scope="col" style="text-align:right">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Records processed</td>
+<td style="text-align:right">1,450</td>
+<td style="text-align:right">1,128</td>
+<td style="text-align:right">1,467</td>
+<td style="text-align:right">4,045</td>
+</tr>
+<tr>
+<td>Relevant</td>
+<td style="text-align:right">252 (17.4%)</td>
+<td style="text-align:right">293 (26.0%)</td>
+<td style="text-align:right">451 (30.7%)</td>
+<td style="text-align:right">996 (24.6%)</td>
+</tr>
+<tr>
+<td>Otherwise</td>
+<td style="text-align:right">1,198 (82.6%)</td>
+<td style="text-align:right">835 (74.0%)</td>
+<td style="text-align:right">1,016 (69.3%)</td>
+<td style="text-align:right">3,049 (75.4%)</td>
+</tr>
+<tr>
+<td><strong>Relevant with allele-level evidence</strong></td>
+<td style="text-align:right"><strong>114 (7.9%)</strong></td>
+<td style="text-align:right"><strong>175 (15.5%)</strong></td>
+<td style="text-align:right"><strong>256 (17.5%)</strong></td>
+<td style="text-align:right"><strong>545 (13.5%)</strong></td>
+</tr>
+<tr>
+<td>Allele-level findings</td>
+<td style="text-align:right">177</td>
+<td style="text-align:right">297</td>
+<td style="text-align:right">406</td>
+<td style="text-align:right">880</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Each record represents a target–variant–article combination. Percentages are relative to processed records. Allele-level evidence requires a nucleotide substitution and explicit allele information.</em></p>
+<ul>
+<li>Only 24.6% of processed records are labeled as relevant to the target association.</li>
+<li>Only 13.5% meet the allele-level evidence criteria.</li>
+<li>Despite having the largest GWAS candidate variant set, hyperlipidemia yields the fewest supporting evidence records.</li>
+</ul>
+<p>The abundance of reported genetic associations does not necessarily translate into an abundance of allele-level supporting evidence. Even within a targeted literature search, supporting evidence meeting our criteria is sparse.</p>
+<h4 id="where-is-supporting-evidence-reported">Where is supporting evidence reported?</h4>
+<p>We also examine where LLMs cite supporting evidence within source publications. Of the 545 evidence records, 519 (95.2%) contain locatable source quotations.</p>
+<p><strong>Table 4. Source locations of supporting quotations.</strong></p>
+<div aria-label="Data table 5; scroll horizontally if needed" class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th scope="col">Article section</th>
+<th scope="col">Non-table</th>
+<th scope="col">Table</th>
+<th scope="col">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abstract</td>
+<td>22</td>
+<td>0</td>
+<td>22 (4.2%)</td>
+</tr>
+<tr>
+<td>Introduction</td>
+<td>3</td>
+<td>0</td>
+<td>3 (0.6%)</td>
+</tr>
+<tr>
+<td>Methods</td>
+<td>9</td>
+<td>13</td>
+<td>22 (4.2%)</td>
+</tr>
+<tr>
+<td><strong>Results</strong></td>
+<td><strong>186</strong></td>
+<td><strong>247</strong></td>
+<td><strong>433 (83.4%)</strong></td>
+</tr>
+<tr>
+<td>Discussion</td>
+<td>14</td>
+<td>0</td>
+<td>14 (2.7%)</td>
+</tr>
+<tr>
+<td>Conclusion</td>
+<td>0</td>
+<td>0</td>
+<td>0 (0.0%)</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>21</td>
+<td>4</td>
+<td>25 (4.8%)</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>255 (49.1%)</strong></td>
+<td><strong>264 (50.9%)</strong></td>
+<td><strong>519 (100%)</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Combined Results and Discussion sections are grouped under Results. Quotations without identifiable source locations are excluded.</em></p>
+<p>Approximately 83% of supporting quotations originate from Results sections and 51% from tables. This highlights the importance of full-text and structured table processing when collecting allele-level genetic evidence.</p>
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>Genetic association data is abundant, but relevant, allele-specific supporting evidence is sparse.</p>
+<p>The LLM-assisted pipeline supports two early stages of expert evidence curation: identifying candidate genetic associations at scale and collecting their supporting evidence.</p>
+<p>By preserving explicit selection criteria, intermediate results, and source provenance, the pipeline provides an inspectable evidence dataset for subsequent expert evaluation.</p>
+
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

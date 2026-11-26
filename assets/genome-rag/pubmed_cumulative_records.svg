@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="734.4pt" height="432pt" viewBox="0 0 734.4 432" version="1.1" role="img" aria-labelledby="chart-title chart-desc">
+ <title id="chart-title">Cumulative PubMed records</title><desc id="chart-desc">Cumulative PubMed records by publication year, 2010 to 2025; 2025 endpoint 39,884,816.</desc><metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432  L 734.4 432  L 734.4 0  L 0 0  z " style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 66.08 378.52  L 647.74 378.52  L 647.74 47.4  L 66.08 47.4  z " style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: middle; fill: #6b7280" x="66.08" y="394.878281" transform="rotate(-0 66.08 394.878281)">2010</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6"/>
+     <g id="text_6">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: middle; fill: #6b7280" x="259.966667" y="394.878281" transform="rotate(-0 259.966667 394.878281)">2015</text>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_11"/>
+     <g id="text_11">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: middle; fill: #6b7280" x="453.853333" y="394.878281" transform="rotate(-0 453.853333 394.878281)">2020</text>
+     </g>
+    </g>
+    <g id="xtick_16">
+     <g id="line2d_16"/>
+     <g id="text_16">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: middle; fill: #6b7280" x="647.74" y="394.878281" transform="rotate(-0 647.74 394.878281)">2025</text>
+     </g>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 11px; font-family: 'Arial'; text-anchor: middle; fill: #111827" x="356.91" y="417.524219" transform="rotate(-0 356.91 417.524219)">Year</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_17">
+      <path d="M 66.08 299.18377  L 647.74 299.18377  " clip-path="url(#pb419f4fb05)" style="fill: none; stroke: #e5e7eb; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18"/>
+     <g id="text_18">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: end; fill: #6b7280" x="58.08" y="303.362911" transform="rotate(-0 58.08 303.362911)">25M</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_19">
+      <path d="M 66.08 219.662175  L 647.74 219.662175  " clip-path="url(#pb419f4fb05)" style="fill: none; stroke: #e5e7eb; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20"/>
+     <g id="text_19">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: end; fill: #6b7280" x="58.08" y="223.841316" transform="rotate(-0 58.08 223.841316)">30M</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_21">
+      <path d="M 66.08 140.140581  L 647.74 140.140581  " clip-path="url(#pb419f4fb05)" style="fill: none; stroke: #e5e7eb; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_22"/>
+     <g id="text_20">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: end; fill: #6b7280" x="58.08" y="144.319721" transform="rotate(-0 58.08 144.319721)">35M</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_23">
+      <path d="M 66.08 60.618986  L 647.74 60.618986  " clip-path="url(#pb419f4fb05)" style="fill: none; stroke: #e5e7eb; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_24"/>
+     <g id="text_21">
+      <text style="font-size: 11px; font-family: 'Arial'; text-anchor: end; fill: #6b7280" x="58.08" y="64.798127" transform="rotate(-0 58.08 64.798127)">40M</text>
+     </g>
+    </g>
+    <g id="text_22">
+     <text style="font-size: 11px; font-family: 'Arial'; text-anchor: middle; fill: #111827" x="20.303906" y="212.96" transform="rotate(-90 20.303906 212.96)">Cumulative records</text>
+    </g>
+   </g>
+   <g id="line2d_25">
+    <path d="M 66.08 363.469091  L 104.857333 349.104628  L 143.634667 334.069464  L 182.412 318.107397  L 221.189333 301.342638  L 259.966667 283.921731  L 298.744 266.181338  L 337.521333 248.113618  L 376.298667 229.417074  L 415.076 209.702255  L 453.853333 186.600977  L 492.630667 161.898945  L 531.408 137.283926  L 570.185333 113.716923  L 608.962667 89.120671  L 647.74 62.450909  " clip-path="url(#pb419f4fb05)" style="fill: none; stroke: #3b82f6; stroke-width: 2.8; stroke-linecap: square"/>
+    <defs>
+     <path id="mc31cac3117" d="M 0 2.25  C 0.596707 2.25 1.169055 2.012926 1.59099 1.59099  C 2.012926 1.169055 2.25 0.596707 2.25 0  C 2.25 -0.596707 2.012926 -1.169055 1.59099 -1.59099  C 1.169055 -2.012926 0.596707 -2.25 0 -2.25  C -0.596707 -2.25 -1.169055 -2.012926 -1.59099 -1.59099  C -2.012926 -1.169055 -2.25 -0.596707 -2.25 0  C -2.25 0.596707 -2.012926 1.169055 -1.59099 1.59099  C -1.169055 2.012926 -0.596707 2.25 0 2.25  z " style="stroke: #3b82f6"/>
+    </defs>
+    <g clip-path="url(#pb419f4fb05)">
+     <use xlink:href="#mc31cac3117" x="66.08" y="363.469091" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="104.857333" y="349.104628" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="143.634667" y="334.069464" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="182.412" y="318.107397" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="221.189333" y="301.342638" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="259.966667" y="283.921731" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="298.744" y="266.181338" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="337.521333" y="248.113618" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="376.298667" y="229.417074" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="415.076" y="209.702255" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="453.853333" y="186.600977" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="492.630667" y="161.898945" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="531.408" y="137.283926" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="570.185333" y="113.716923" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="608.962667" y="89.120671" style="fill: #3b82f6; stroke: #3b82f6"/>
+     <use xlink:href="#mc31cac3117" x="647.74" y="62.450909" style="fill: #3b82f6; stroke: #3b82f6"/>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 66.08 378.52  L 66.08 47.4  " style="fill: none; stroke: #d1d5db; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 66.08 378.52  L 647.74 378.52  " style="fill: none; stroke: #d1d5db; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 10px; font-family: 'Arial'; text-anchor: start; fill: #6b7280" x="66.08" y="38.697912" transform="rotate(-0 66.08 38.697912)">PubMed records by publication year · 2010–2025</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 10.5px; font-family: 'Arial'; text-anchor: start; fill: #3b82f6" x="655.74" y="65.348253" transform="rotate(-0 655.74 65.348253)">39,884,816</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'Arial'; text-anchor: start; fill: #111827" x="66.08" y="23.4" transform="rotate(-0 66.08 23.4)">Cumulative PubMed records</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pb419f4fb05">
+   <rect x="66.08" y="47.4" width="581.66" height="331.12"/>
+  </clipPath>
+ </defs>
+</svg>
